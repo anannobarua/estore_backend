@@ -73,7 +73,7 @@ If both are in diffrent App directory the use INCLUDE
 
                   &nbsp; 
                   
-                  <select id="">
+                  <select id="select{{product.id}}">
                   
                     <option selected>
                   
@@ -93,15 +93,15 @@ If both are in diffrent App directory the use INCLUDE
                   
                   <br> <br>
 
-                  <button type="button" data-index="{{ product.id }}"
-                    class="btn btn-danger btn-sm delete-button">
+                  <button type="button" data-index="{{product.id}}"
+                    class="btn btn-primary btn-sm update-button">
                     Update
                   
                   </button>
                   
                   &nbsp;
 
-                  <button type="button" id="delete-button"
+                  <button type="button" data-index="{{ product.id }}"
                     class="btn btn-danger btn-sm delete-button">
                     Delete
         
@@ -165,7 +165,7 @@ If both are in diffrent App directory the use INCLUDE
 
                   //console.log(json)
 
-                location.reload()
+                location.reload();
 
                 document.getElementById("cart-qty").textContent = json.qty
 
@@ -181,6 +181,51 @@ If both are in diffrent App directory the use INCLUDE
 
           });
       })
+
+
+
+        // Update button
+
+        $(document).on('click', '.update-button', function(e){
+
+          e.preventDefault();
+
+          var theproductid = $(this).data('index');
+
+          $.ajax({
+
+              type: 'POST',
+              url: '{% url "cart-update" %}',
+              data: {
+                  
+                  product_id: $(this).data('index'),
+                  product_quantity: $('#select' + theproductid + 'option:selected').text(),
+                  csrfmiddlewaretoken: "{{ csrf_token }}",
+                  action: 'post'
+              },
+
+
+              success: function(json){
+
+                  //console.log(json)
+
+                location.reload();
+
+                document.getElementById("cart-qty").textContent = json.qty
+
+                document.getElementById("total").textContent = json.total
+
+
+
+              },
+
+              error: function(xhr, errmsg, err){
+
+              }
+
+          });
+      })
+
 
   </script>
 
