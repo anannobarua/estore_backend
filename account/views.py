@@ -18,8 +18,30 @@ def register(request):
             
             form.save()
             
-            return redirect('')
+            return redirect('store')
         
     context = {'form': form}
     
     return render(request, 'account/registration/register.html',context=context)
+
+
+
+def email_varification(request):
+    
+    pass
+
+
+def email_varification_sent(request):
+    
+    pass
+
+
+def email_varification_success(request):
+    
+    pass
+
+
+def email_varification_failed(request):
+    
+    pass
+
