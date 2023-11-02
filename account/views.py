@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 
+from django.http import HttpResponse
 from .forms import CreateUserForm
 
 from django.contrib.auth.models import User
 
 
+from django.contrib.auth.tokens import default_token_generator as user_tokenizer_generate
 
 from django.contrib.sites.shortcuts import get_current_site
 from . token import user_tokenizer_generate
@@ -90,17 +92,17 @@ def email_verification(request, uidb64, token):
 
 
 
-def email_varification_sent(request):
+def email_verification_sent(request):
     
     return render(request,  'account/registration/email-verification-sent.html')
 
 
-def email_varification_success(request):
+def email_verification_success(request):
     
     return render(request,  'account/registration/email-verification-success.html')
 
 
-def email_varification_failed(request):
+def email_verification_failed(request):
     
     return render(request,  'account/registration/email-verification-failed.html')
 
