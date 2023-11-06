@@ -133,8 +133,15 @@ def my_login(request):
                 
                 auth.login(request, user)
                 
-                return redirect("")
+                return redirect("dashboard")
             
     context = {'form': form}
     
-    return render(request, 'account/my-login.html', context=context)        
+    return render(request, 'account/my-login.html', context=context)     
+
+
+# Logout
+
+def dashboard(request):
+    
+    return render(request, 'account/dashboard.html')

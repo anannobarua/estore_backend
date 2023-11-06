@@ -22,6 +22,10 @@ urlpatterns = [
     
     # Login / Logout Urls
     
-    path('my-login', views.my_login, name='my-login')
+    path('my-login', views.my_login, name='my-login'),
+    
+    # Logout 
+    
+    path('dashboard',views.dashboard, name='dashboard')
     
 ]
