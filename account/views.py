@@ -23,6 +23,8 @@ from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
 # from django.template import ContextPopException
 
+from django.contrib.auth.decorators import login_required
+
 
 
 # Create your views here.
@@ -142,6 +144,14 @@ def my_login(request):
 
 # Logout
 
+def user_logout(request):
+    
+    auth.logout(request)
+    
+    return redirect('store')
+
+
+@login_required(login_url='my-login')
 def dashboard(request):
     
     return render(request, 'account/dashboard.html')
